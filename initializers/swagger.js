@@ -157,18 +157,18 @@ module.exports = {
               api.swagger.documentation.paths["/" + action.name] = {};
             }
 
-            for (var k = 0, len = verbs.length; k < len; k++) {
+            //for (var k = 0, len = verbs.length; k < len; k++) {
 
-              var method = verbs[k];
+              var method = 'patch';
 
               var params = [];
               parameters.forEach(function(p) {
                 params.push(p);
               });
 
-              switch (method.toLowerCase()) {
-                case 'put':
-                case 'post':
+              // switch (method.toLowerCase()) {
+              //   case 'put':
+              //   case 'post':
                   if (action.modelSchema) {
                     params.push({
                       name: 'body',
@@ -178,23 +178,14 @@ module.exports = {
                         $ref: "#/definitions/action_" + action.name + version
                       }
                     });
-                  } else {
-                    params.push({
-                      name: 'body',
-                      "in": 'body',
-                      description: 'Body of the post/put action',
-                      schema: {
-                        type: 'object'
-                      }
-                    });
                   }
-                  break;
-                default:
-                  break;
-              }
+              //     break;
+              //   default:
+              //     break;
+              // }
 
               api.swagger.documentation.paths["/" + action.name][method] = buildPath(null, action, params, tags);
-            }
+            // }
           }
         }
 
